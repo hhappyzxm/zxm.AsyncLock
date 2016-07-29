@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace zxm.AsyncLock
 {
-    public class AsyncLock
+    public class Locker
     {
-        private readonly AsyncSemaphore _semaphore;
+        private readonly Semaphore _semaphore;
         private readonly Task<Releaser> _releaser;
 
-        public AsyncLock()
+        public Locker()
         {
-            _semaphore = new AsyncSemaphore(1);
+            _semaphore = new Semaphore(1);
             _releaser = Task.FromResult(new Releaser(this));
         }
 
@@ -21,20 +20,20 @@ namespace zxm.AsyncLock
             var wait = _semaphore.WaitAsync();
             return wait.IsCompleted ?
                 _releaser :
-                wait.ContinueWith((_, state) => new Releaser((AsyncLock)state),
+                wait.ContinueWith((_, state) => new Releaser((Locker)state),
                     this, CancellationToken.None,
                     TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
         }
 
         public struct Releaser : IDisposable
         {
-            private readonly AsyncLock m_toRelease;
+            private readonly Locker _toRelease;
 
-            internal Releaser(AsyncLock toRelease) { m_toRelease = toRelease; }
+            internal Releaser(Locker toRelease) { _toRelease = toRelease; }
 
             public void Dispose()
             {
-                m_toRelease?._semaphore.Release();
+               _toRelease?._semaphore.Release();
             }
         }
     }

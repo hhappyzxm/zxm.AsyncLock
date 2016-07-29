@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [ "zxm" ],
   "description": "zxm.AsyncLock is an extensions to lock when async/await.",
   "title": "zxm.AsyncLock",

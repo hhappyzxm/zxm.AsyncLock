@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace zxm.AsyncLock
 {
-    internal class AsyncSemaphore
+    internal class Semaphore
     {
         private static readonly Task _completed = Task.FromResult(true);
         private readonly Queue<TaskCompletionSource<bool>> _waiters = new Queue<TaskCompletionSource<bool>>();
         private int _currentCount;
 
-        public AsyncSemaphore(int initialCount)
+        public Semaphore(int initialCount)
         {
             if (initialCount < 0) throw new ArgumentOutOfRangeException("initialCount");
             _currentCount = initialCount;

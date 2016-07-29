@@ -1,0 +1,27 @@
+﻿{
+  "version": "1.0.0",
+  "authors": [ "zxm" ],
+  "description": "zxm.AsyncLock is an extensions to lock when async/await.",
+  "title": "zxm.AsyncLock",
+  "copyright": "2016 © zxm",
+  "packOptions": {
+    "owners": [ "zxm" ],
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "projectUrl": "https://github.com/hhappyzxm/zxm.AsyncLock",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/hhappyzxm/zxm.AsyncLock"
+    },
+    "tags": [ "async", "lock" ]
+  },
+  "frameworks": {
+    "netstandard1.3": {
+      "dependencies": {
+        "System.Threading": "4.0.11",
+        "System.Threading.Tasks": "4.0.11",
+        "System.Collections": "4.0.11"
+      }
+    },
+    "net45": {}
+  }
+}
